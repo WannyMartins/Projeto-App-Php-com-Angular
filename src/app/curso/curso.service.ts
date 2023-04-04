@@ -23,7 +23,6 @@ export class CursoService {
     return this.http.get(this.url + 'listar').pipe(
       map((res: any) => {
         this.vetor = res['cursos'];
-        console.log(this.vetor)
         return this.vetor
       })
     )
@@ -42,7 +41,7 @@ export class CursoService {
   removerCurso(c: Curso): Observable<Curso[]>{
     const params = new HttpParams().set("idCurso", c.idCurso!.toString())
     return this.http.post(this.url + 'excluir', {params: params})
-    .pipe<Curso[]>(
+    .pipe(
       map((res: any) => {
         const filtro = this.vetor.filter((curso) => {
           return +curso['idCurso']! !== +c.idCurso!;
