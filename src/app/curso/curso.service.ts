@@ -12,7 +12,7 @@ export class CursoService {
 
   url : string = "http://localhost/api/php/";
  
-  vetor!: Curso[];
+  vetor: Curso[] = [];
 
   constructor(private http: HttpClient) {
     
@@ -32,7 +32,7 @@ export class CursoService {
   cadastrarCursos(c: Curso): Observable<Curso[]>{
     return this.http.post(this.url + 'cadastrar', {cursos: c})
     .pipe(
-      map((res: Curso[] | any) => {
+      map((res: any) => {
         this.vetor.push(res['cursos']);
         return this.vetor
       })
@@ -43,7 +43,7 @@ export class CursoService {
     const params = new HttpParams().set("idCurso", c.idCurso!.toString())
     return this.http.post(this.url + 'excluir', {params: params})
     .pipe<Curso[]>(
-      map((res) => {
+      map((res: any) => {
         const filtro = this.vetor.filter((curso) => {
           return +curso['idCurso']! !== +c.idCurso!;
         })
@@ -55,8 +55,8 @@ export class CursoService {
 
   alterarCurso(c: Curso): Observable<Curso[]>{
     return this.http.post(this.url + 'alterar', {cursos: c})
-    .pipe<Curso[]>(
-      map((res: Curso[] | any) => {
+    .pipe(
+      map((res: any) => {
         const cursoAlterado = this.vetor.find((curso) => +curso['idCurso']! === +['idCurso']!)
         if(cursoAlterado){
           cursoAlterado['nomeCurso'] = c['nomeCurso'];

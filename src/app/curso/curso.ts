@@ -1,3 +1,5 @@
 export class Curso{
-    nomeCurso: string | any; valorCurso: number | any; idCurso?: number;
+    nomeCurso: string = "";
+    valorCurso: number = 0;
+    idCurso?: number;
 }

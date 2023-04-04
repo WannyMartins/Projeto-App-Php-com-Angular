@@ -9,24 +9,29 @@ import { Curso } from './curso';
 })
 export class CursoComponent implements OnInit {
 
-  vetor: Curso[] | any;
+  vetor: Curso[] = [];
 
   curso = new Curso();
 
+  
   constructor(private cursoService: CursoService,
    
-    ){ }
+    ){
+      
+     }
 
   ngOnInit(): void {
     this.selecao();
+    this.curso.nomeCurso = "";
+    this.curso.valorCurso = 0;
   }
 
   cadastro(c: Curso){
     this.cursoService.cadastrarCursos(c).subscribe(
       (res) => {
         this.vetor = res;
-        this.curso.nomeCurso = null;
-        this.curso.valorCurso = null;
+        this.curso.nomeCurso = "";
+        this.curso.valorCurso = 0;
         this.selecao();
       }
 
@@ -45,8 +50,8 @@ export class CursoComponent implements OnInit {
     this.cursoService.alterarCurso(c).subscribe(
       (res) =>{
         this.vetor = res;
-        this.curso.nomeCurso = null;
-        this.curso.valorCurso = null;
+        this.curso.nomeCurso = "";
+        this.curso.valorCurso = 0;
         this.selecao();
       }
     )
@@ -57,8 +62,8 @@ export class CursoComponent implements OnInit {
     this.cursoService.removerCurso(c).subscribe(
       (res) => {
         this.vetor = res;
-        this.curso.nomeCurso = null;
-        this.curso.valorCurso = null;
+        this.curso.nomeCurso = "";
+        this.curso.valorCurso = 0;
         this.selecao();
       }
     )
